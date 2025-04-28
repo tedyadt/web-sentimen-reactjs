@@ -6,7 +6,6 @@ const SentimentPieChart = ({ data }) => {
 
   return (
     <div className="w-full h-80">
-    <h2 className="text-2xl font-bold text-gray-300 ">Distribusi Sentimen</h2>
       <ResponsiveContainer>
         <PieChart>
           <Pie

@@ -7,7 +7,7 @@ const Navbar = () => {
   const navigation = [
     { title: "Home", path: "/" },
     { title: "Predict", path: "/predict" },
-    { title: "Dataset", path: "#" }
+    { title: "Dataset", path: "/dataset" }
   ];
 
   return (
@@ -16,7 +16,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between py-3 md:py-5 md:block">
           <Link to="/">
             <img
-              src="https://www.floatui.com/logo.svg"
+              src="https://akupintar.id/documents/20143/0/jvjvb+vjhbhjbj.png/919d824f-36a2-8087-a213-dc3f8ed903c6?version=1.0&t=1717736287023&imagePreview=1"
               width={120}
               height={50}
               alt="Float UI logo"

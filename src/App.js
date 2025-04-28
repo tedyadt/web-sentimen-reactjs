@@ -6,6 +6,8 @@ import SemiCircleProgress from './components/Semicircleprogress';
 import BackgroundGradient from './components/BackgroundGradient';
 import SentimentPieChart from './components/SentimentPieChart';
 import PredictPage from './pages/Predictpage';
+import BarChartSentimen from './components/BarChartSentimen';
+import CsvTable from './pages/DatasetPage';
 
 function HomePage() {
   return (
@@ -29,6 +31,9 @@ function HomePage() {
           </a>
          
         </div>
+      </div>
+      <div className= "flex flex-row items-center justify-center gap-10 sm:flex mt-10">
+        <BarChartSentimen />  
         <SemiCircleProgress percentage={80} />
         <SentimentPieChart data={[{ name: 'Positif', value: 1861}, { name: 'Negatif', value: 818 }]} />
       </div>
@@ -43,6 +48,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/predict" element={<PredictPage />} />
+          <Route path= "/dataset" element={<CsvTable />} />
         </Routes>
       </div>
   );
