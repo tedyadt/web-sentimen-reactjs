@@ -1,58 +1,30 @@
 import React from 'react';
-import { BarChart, Bar, Legend, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  Legend,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer
+} from 'recharts';
 
 const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
+  { name: 'jual', positive: 650 },
+  { name: 'beli', positive: 600 },
+  { name: 'facebook', positive: 370 },
+  { name: 'cari', positive: 230 },
+  { name: 'cod', positive: 210 },
+  { name: 'tipu', negative: 100 },
+  { name: 'banyak', negative: 90 },
 ];
 
 const SentimenBarChart = () => {
   return (
-    <div className="w-full h-80">
-    <ResponsiveContainer width="100%" height="100%">
+    <div className="w-1/2 h-80 mb-5">
+      <ResponsiveContainer width="70%" height="120%">
         <BarChart
-          width={500}
-          height={300}
           data={data}
           margin={{
             top: 20,
@@ -66,8 +38,8 @@ const SentimenBarChart = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="pv" stackId="a" fill="#8884d8" />
-          <Bar dataKey="uv" stackId="a" fill="#82ca9d" />
+          <Bar dataKey="positive" stackId="a" fill="#8884d8" />
+          <Bar dataKey="negative" stackId="a" fill="#82ca9d" />
         </BarChart>
       </ResponsiveContainer>
     </div>

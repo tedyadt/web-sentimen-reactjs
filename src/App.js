@@ -32,11 +32,12 @@ function HomePage() {
          
         </div>
       </div>
-      <div className= "flex flex-row items-center justify-center gap-10 sm:flex mt-10">
-        <BarChartSentimen />  
-        <SemiCircleProgress percentage={80} />
-        <SentimentPieChart data={[{ name: 'Positif', value: 1861}, { name: 'Negatif', value: 818 }]} />
+      <div className= "flex flex-row items-center justify-center w-full">
+        <BarChartSentimen />
+        <img className='w-[500px] h-[300px] items-left rounded-2xl '  src='/images/wordcloud.png'></img>
       </div>
+      <SemiCircleProgress percentage={80} />
+      <SentimentPieChart data={[{ name: 'Positif', value: 1861}, { name: 'Negatif', value: 818 }]} />
     </section>
   );
 }
