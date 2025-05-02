@@ -5,7 +5,7 @@ const Semicircleprogress = ({ percentage }) => {
   
     return (
     <div className="flex flex-col items-left  p-4 rounded-2xl font-bold mt-10">
-      <h2 className="text-2xl font-bold text-gray-300 ">Accuracy</h2>
+      <h2 className="text-2xl font-bold text-gray-900 ">Accuracy</h2>
       <div className="w-[180px] h-[100px] mx-auto my-6 relative items-left">
         <svg width="180" height="100">
           {/* Background semi-circle */}
@@ -26,7 +26,7 @@ const Semicircleprogress = ({ percentage }) => {
             strokeLinecap="round"
           />
         </svg>
-        <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl font-bold text-gray-300 mt-4">
+        <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-xl font-bold text-gray-900 mt-4">
           {percentage}%
         </div>
       </div>

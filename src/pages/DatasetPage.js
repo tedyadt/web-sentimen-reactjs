@@ -43,7 +43,7 @@ const CsvTable = () => {
 
   return (
 
-    <div className="bg-gray-900 min-h-screen py-6 px-4 sm:px-6 lg:px-8">
+    <div className="bg-white min-h-screen py-6 px-4 sm:px-6 lg:px-8">
     <div className="max-w-7xl mx-auto shadow-md rounded-md overflow-hidden">
       <div className="bg-gray-800 p-6">
         <h2 className="text-xl font-semibold text-gray-100 mb-4">Dataset Table</h2>

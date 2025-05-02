@@ -36,7 +36,7 @@ const SentimentPredictor = () => {
           </button>
         </form>
         {prediction && (
-          <p className="p-2 text-white rounded-md">
+          <p className="p-2 text-gray-900 rounded-md">
             Prediction sentimen :{" "}
             <span
               className={`font-bold rounded-xl ${

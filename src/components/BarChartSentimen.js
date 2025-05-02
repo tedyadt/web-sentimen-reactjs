@@ -22,16 +22,11 @@ const data = [
 
 const SentimenBarChart = () => {
   return (
-    <div className="w-1/2 h-80 mb-5">
-      <ResponsiveContainer width="70%" height="120%">
+    <div className="w-full h-[300px]">
+      <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
-          margin={{
-            top: 20,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
+          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
