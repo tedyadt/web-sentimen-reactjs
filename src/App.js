@@ -8,6 +8,7 @@ import SentimentPieChart from "./components/SentimentPieChart";
 import PredictPage from "./pages/Predictpage";
 import BarChartSentimen from "./components/BarChartSentimen";
 import CsvTable from "./pages/DatasetPage";
+import Footer from "./components/Footer";
 
 function HomePage() {
   return (
@@ -31,9 +32,9 @@ function HomePage() {
           </a>
         </div>
       </div>
-      <div className="flex flex-row items-start justify-center w-full gap-12 mt-10">
+      <div className="flex flex-row items-start justify-center w-full gap-12 mt-10 ">
         {/* Card 1 - Bar Chart */}
-        <div className="bg-white shadow-xl rounded-xl border p-3 w-[550px]">
+        <div className="bg-white shadow-xl rounded-xl border p-3 w-[550px] ">
           <h2 className="text-xl font-semibold mb-3 text-center">
             Histogram Sentimen
           </h2>
@@ -41,7 +42,7 @@ function HomePage() {
         </div>
 
         {/* Card 2 - Wordcloud Image */}
-        <div className="bg-white shadow-xl rounded-xl border p-3 w-[550px]">
+        <div className="bg-white shadow-xl rounded-xl border p-3 w-[550px] animate-in fade-in-10 slide-in-from-top-10 duration-700 delay-400">
           <h2 className="text-xl font-semibold mb-3 text-center">Word Cloud</h2>
           <img
             className="w-full h-[300px] object-contain rounded-xl"
@@ -72,6 +73,7 @@ function App() {
         <Route path="/predict" element={<PredictPage />} />
         <Route path="/dataset" element={<CsvTable />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

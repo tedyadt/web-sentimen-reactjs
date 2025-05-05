@@ -11,7 +11,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-gradient-to-r from-[#a400e5] to-pink-800 blur-1xl opacity-100 z-10 w-full border-b md:border-0 md:static relative">
+    <nav className="bg-gray-100 shadow-lg opacity-100 z-10 w-full md:static relative">
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
         <div className="flex items-center justify-between py-3 md:py-5 md:block">
           <Link to="/">
@@ -42,7 +42,7 @@ const Navbar = () => {
         <div className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${state ? 'block' : 'hidden'}`}>
           <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0">
             {navigation.map((item, idx) => (
-              <li key={idx} className="text-gray-300 hover:text-indigo-400">
+              <li key={idx} className="text-black hover:text-indigo-400">
                 <Link to={item.path}>{item.title}</Link>
               </li>
             ))}
