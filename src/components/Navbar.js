@@ -49,7 +49,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="hidden md:inline-block">
-          <Link to="/predict" className="py-3 px-4 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md shadow">
+          <Link to="/predict" className="py-3 px-4 text-white bg-blue-600 hover:bg-indigo-700 rounded-md shadow">
             Get Started
           </Link>
         </div>
