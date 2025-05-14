@@ -19,7 +19,7 @@ const Navbar = () => {
               src="https://akupintar.id/documents/20143/0/jvjvb+vjhbhjbj.png/919d824f-36a2-8087-a213-dc3f8ed903c6?version=1.0&t=1717736287023&imagePreview=1"
               width={120}
               height={50}
-              alt="Float UI logo"
+              alt="Telkom Logo"
             />
           </Link>
           <div className="md:hidden">

@@ -31,7 +31,7 @@ function HomePage() {
               Website ini merupakan hasil dari Tugas Akhir berjudul "Analisis Sentimen Facebook Marketplace Menggunakan Metode Support Vector Machine dan Seleksi Fitur Chi Square". Penelitian ini bertujuan untuk mengklasifikasikan opini pengguna terhadap Facebook Marketplace ke dalam sentimen positif dan negatif. Dengan menggunakan algoritma Support Vector Machine (SVM) sebagai metode klasifikasi dan Chi Square sebagai teknik seleksi fitur, sistem ini dikembangkan untuk menyajikan analisis sentimen secara efektif dan informatif berdasarkan data dari media sosial X.
             </p>
             <a
-              href="javascript:void(0)"
+              href="/dataset"
               className="inline-flex gap-x-1 items-center text-indigo-600 hover:text-indigo-500 duration-150 font-medium"
             >
               Learn more
@@ -53,7 +53,7 @@ function HomePage() {
       </div>
       <div className="flex flex-row items-start justify-center w-full gap-12 mt-20 ">
         {/* Card 1 - Bar Chart */}
-        <div className="bg-white shadow-xl rounded-xl border p-3 w-[550px] animate-in fade-in-10 slide-in-from-top-10 duration-700 delay-400">
+        <div className="bg-white hover:shadow-xl rounded-xl border p-3 w-[550px] animate-in fade-in-10 slide-in-from-top-10 duration-700 delay-400">
           <BarChartSentimen />
           <h2 className="text-xl font-semibold mb-3 text-left">Histogram</h2>
           <p class="mt-1 text-gray-500 dark:text-neutral-400">
@@ -78,7 +78,6 @@ function HomePage() {
         <ScoreCard />
       </div>
       <div className="flex flex-row items-start justify-center w-full mt-10">
-        <SemiCircleProgress percentage={80} />
         <SentimentPieChart
           data={[
             { name: "Positif", value: 1861 },
