@@ -13,6 +13,7 @@ import ScoreCard from "./components/ScoreCard";
 
 function HomePage() {
   return (
+    
     <section className="relative overflow-hidden py-28 px-4 bg-white md:px-8">
       <div className="max-w-screen-xl mx-auto md:px-8">
         <div className="items-center gap-x-12 sm:px-4 md:px-0 lg:flex">
@@ -91,6 +92,7 @@ function HomePage() {
 
 function App() {
   return (
+    
     <div className="App relative overflow-hidden">
       <Navbar />
       <Routes>
