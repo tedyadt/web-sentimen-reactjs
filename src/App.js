@@ -19,7 +19,7 @@ function HomePage() {
         <div className="items-center gap-x-12 sm:px-4 md:px-0 lg:flex">
           <div className="flex-1 sm:hidden lg:block">
             <img
-              src="/images/facebook.jpeg"
+              src="/images/fesbukkk.png"
               className="md:max-w-lg sm:rounded-lg "
               alt=""
             />
@@ -33,7 +33,7 @@ function HomePage() {
             </p>
             <a
               href="/dataset"
-              className="inline-flex gap-x-1 items-center text-indigo-600 hover:text-indigo-500 duration-150 font-medium"
+              className="inline-flex gap-x-1 items-center text-[#3A59D1] hover:text-indigo-500 duration-150 font-medium"
             >
               Learn more
               <svg
@@ -56,7 +56,7 @@ function HomePage() {
         {/* Card 1 - Bar Chart */}
         <div className="bg-white hover:shadow-xl rounded-xl border p-3 w-[550px] animate-in fade-in-10 slide-in-from-top-10 duration-700 delay-400">
           <BarChartSentimen />
-          <h2 className="text-xl font-semibold mb-3 text-left">Histogram</h2>
+          <h2 className="text-xl font-semibold mb-3 text-left">Persebaran Sentimen</h2>
           <p class="mt-1 text-gray-500 dark:text-neutral-400">
       Some quick example text to build on the card title and make up the bulk of the card's content.
         </p>
@@ -79,12 +79,6 @@ function HomePage() {
         <ScoreCard />
       </div>
       <div className="flex flex-row items-start justify-center w-full mt-10">
-        <SentimentPieChart
-          data={[
-            { name: "Positif", value: 1861 },
-            { name: "Negatif", value: 818 },
-          ]}
-        />
       </div>
     </section>
   );

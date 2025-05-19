@@ -19,7 +19,7 @@ const Semicircleprogress = ({ title, percentage }) => {
       <path
         d="M 10 90 A 60 60 0 0 1 130 90"
         fill="none"
-        stroke="#A020F0"
+        stroke="#3D90D7"
         strokeWidth="15"
         strokeDasharray={circumference}
         strokeDashoffset={offset}

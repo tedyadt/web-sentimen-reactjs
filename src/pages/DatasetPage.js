@@ -23,9 +23,9 @@ const TableComponent = ({ title, description, endpoint, columnOrder }) => {
     <div className="mt-10">
       <h3 className="text-gray-800 text-xl font-bold sm:text-2xl">{title}</h3>
       <p className="text-gray-600 mt-2">{description}</p>
-      <div className="overflow-x-auto mt-4">
+      <div className="shadow-sm border rounded-lg overflow-x-auto mt-4">
         <table className="w-full table-auto text-sm text-left">
-          <thead className="text-gray-600 font-medium border-b">
+          <thead className="bg-gray-100 text-gray-600 font-medium border-b">
             <tr>
               {columnOrder.map((col, idx) => (
                 <th key={idx} className="py-3 px-4">
@@ -34,14 +34,14 @@ const TableComponent = ({ title, description, endpoint, columnOrder }) => {
               ))}
             </tr>
           </thead>
-          <tbody className="text-gray-600 divide-y">
+          <tbody className="text-gray-600 divide-y font-sans">
             {paginatedData.map((item, idx) => (
               <tr key={idx}>
                 {columnOrder.map((col, i) => {
                   const value = item[col];
 
                   // Atur warna background untuk polarity
-                  let cellClass = "px-3 py-2 rounded-full text-x";
+                  let cellClass = "px-3 py-2 rounded-3xl text-base";
                   if (col === "polarity") {
                     cellClass +=
                       value === "positive"

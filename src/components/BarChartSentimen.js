@@ -7,17 +7,16 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  ResponsiveContainer
+  ResponsiveContainer,
+  Rectangle
 } from 'recharts';
 
 const data = [
-  { name: 'jual', positive: 650 },
-  { name: 'beli', positive: 600 },
-  { name: 'facebook', positive: 370 },
-  { name: 'cari', positive: 230 },
-  { name: 'cod', positive: 210 },
-  { name: 'tipu', negative: 100 },
-  { name: 'banyak', negative: 90 },
+  { name: 'positive', train: 1264,
+    test: 655},
+  { name: 'negative', train: 317,
+    test: 163},
+  
 ];
 
 const SentimenBarChart = () => {
@@ -26,15 +25,20 @@ const SentimenBarChart = () => {
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
-          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="positive" stackId="a" fill="#8884d8" />
-          <Bar dataKey="negative" stackId="a" fill="#82ca9d" />
+          <Bar dataKey="train" stackId="a" fill="#3D90D7"/>
+          <Bar dataKey="test" stackId="b"  fill="#7AC6D2"/>
         </BarChart>
       </ResponsiveContainer>
     </div>
