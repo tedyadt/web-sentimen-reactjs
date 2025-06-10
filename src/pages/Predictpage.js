@@ -1,10 +1,28 @@
 import React from 'react';
 import SentimentPredictor from '../components/SentimentPredictor';
+import { TrendingUp } from 'lucide-react';
 
 const PredictPage = () => {
   return (
-    <div className="text-white p-4 bg-white min-h-screen">
-      <h2 className="text-3xl mb-6 text-center font-sans font-semibold mt-10 text-gray-900">Prediksi Sentimen</h2>
+    <div className="min-h-screen">
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b">
+          <div className="text-center">
+        <div className="max-w-4xl mx-auto px-4 py-6">
+            <div className="flex justify-center items-center gap-3 mb-2">
+              <div className="p-3 bg-gradient-to-r from-blue-500 to-sky-400 rounded-full">
+                <TrendingUp className="w-6 h-6 text-white" />
+              </div>
+              <h1 className="text-3xl font-bold text-gray-900">Prediksi Sentimen</h1>
+            </div>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Analisis sentimen teks menggunakan machine learning untuk menentukan apakah suatu teks memiliki sentimen positif atau negatif
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
       <SentimentPredictor />
     </div>
   );
