@@ -5,7 +5,7 @@ const ScoreCards = () => {
   const scores = [
     { title: 'Accuracy', percentage: 80 },
     { title: 'Precision', percentage: 78 },
-    { title: 'Recall', percentage: 85 },
+    { title: 'Recall', percentage: 76 },
     { title: 'F1 Score', percentage: 77 },
   ];
 

@@ -45,9 +45,9 @@ const HomePage = () => {
         {/* Card 1 - Bar Chart */}
         <div className="bg-white hover:shadow-xl rounded-xl border p-3 w-full max-w-[550px] animate-in fade-in-10 slide-in-from-top-10 duration-700 delay-400">
           <BarChartSentimen />
-          <h2 className="text-xl font-semibold mb-3 text-left">Persebaran Sentimen</h2>
+          <h2 className="text-xl font-semibold mb-3 text-left">Distribusi Sentimen</h2>
           <p class="mt-1 text-gray-500 dark:text-neutral-400">
-      Some quick example text to build on the card title and make up the bulk of the card's content.
+      Visualisasi ini menampilkan sebaran data positif dan negatif yang digunakan dalam proses pelatihan (training) dan pengujian (testing) model.
         </p>
         </div>
 
@@ -60,7 +60,7 @@ const HomePage = () => {
           />
           <h2 className="text-xl font-semibold mb-3 text-left">Word Cloud</h2>
           <p class="mt-1 text-gray-500 dark:text-neutral-400">
-      Some quick example text to build on the card title and make up the bulk of the card's content.
+      Wordcloud menyoroti kata-kata paling sering muncul pada masing-masing kategori sentimen serta ukuran kata mencerminkan tingkat kemunculannya.
         </p>
         </div>
       </div>
