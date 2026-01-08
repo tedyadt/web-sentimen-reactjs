@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Search } from "lucide-react";
-
+import { Search, RefreshCw, AlertCircle, FileText } from "lucide-react";
 import axios from "axios";
 
 const TableComponent = ({ title, description, endpoint, columnOrder }) => {
@@ -43,7 +42,6 @@ const TableComponent = ({ title, description, endpoint, columnOrder }) => {
     fetchData();
   }, [endpoint]);
 
-  // Filter data based on search term
   useEffect(() => {
     if (!searchTerm) {
       setFilteredData(data);
@@ -55,7 +53,7 @@ const TableComponent = ({ title, description, endpoint, columnOrder }) => {
       );
       setFilteredData(filtered);
     }
-    setPage(0); // Reset to first page when searching
+    setPage(0);
   }, [searchTerm, data, columnOrder]);
 
   const paginatedData = filteredData.slice(
@@ -70,203 +68,250 @@ const TableComponent = ({ title, description, endpoint, columnOrder }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden mt-10">
-      <div className="bg-gradient-to-r from-blue-600 to-sky-400 px-6 py-4">
-        <h2 className="text-xl font-semibold text-white">{title}</h2>
-        <p className="text-blue-100 text-sm mt-1">{description}</p>
+    <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 mb-8">
+      {/* Header with gradient */}
+      <div className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-indigo-600 px-8 py-6">
+        <div className="relative">
+          <div className="flex items-start gap-3">
+            <div className="bg-white/20 backdrop-blur-sm rounded-lg p-2">
+              <FileText className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-white">{title}</h2>
+              <p className="text-blue-100 text-sm mt-1">{description}</p>
+            </div>
+          </div>
+        </div>
       </div>
       
       {/* Search and Controls */}
-      <div className="p-4 bg-gray-50 border-b flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
-        <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-          <input
-            type="text"
-            placeholder="Cari data..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          />
+      <div className="p-6 bg-gradient-to-b from-gray-50 to-white border-b border-gray-200">
+        <div className="flex flex-col lg:flex-row gap-4 justify-between items-start lg:items-center">
+          <div className="relative flex-1 w-full lg:max-w-md">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <input
+              type="text"
+              placeholder="Cari dalam dataset..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl w-full focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+            />
+          </div>
+          
+          <div className="flex items-center gap-3 bg-white rounded-xl border-2 border-gray-200 px-4 py-2">
+            <label htmlFor="rowsPerPage" className="text-sm font-medium text-gray-700">
+              Tampilkan:
+            </label>
+            <select
+              id="rowsPerPage"
+              value={rowsPerPage}
+              onChange={handleRowsPerPageChange}
+              className="border-0 rounded-lg px-3 py-1.5 text-sm font-semibold text-gray-700 focus:ring-2 focus:ring-blue-500 bg-gray-50"
+            >
+              <option value={5}>5</option>
+              <option value={10}>10</option>
+              <option value={25}>25</option>
+              <option value={50}>50</option>
+              <option value={100}>100</option>
+            </select>
+            <span className="text-sm text-gray-600">entri</span>
+          </div>
         </div>
-        
-        <div className="flex items-center gap-2">
-          <label htmlFor="rowsPerPage" className="text-sm text-gray-600">
-            Tampilkan:
-          </label>
-          <select
-            id="rowsPerPage"
-            value={rowsPerPage}
-            onChange={handleRowsPerPageChange}
-            className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          >
-            <option value={5}>5</option>
-            <option value={10}>10</option>
-            <option value={25}>25</option>
-            <option value={50}>50</option>
-            <option value={100}>100</option>
-          </select>
-          <span className="text-sm text-gray-600">entri</span>
-        </div>
-      </div>
 
-      {/* Results Info */}
-      <div className="px-4 py-2 bg-gray-50 border-b">
-        <p className="text-sm text-gray-600">
-          Menampilkan {paginatedData.length} dari {filteredData.length} entri
-          {searchTerm && ` (difilter dari ${data.length} total entri)`}
-        </p>
+        {/* Results Info */}
+        <div className="mt-4 flex items-center gap-2 text-sm">
+          <div className="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg font-medium">
+            {paginatedData.length} dari {filteredData.length} entri
+          </div>
+          {searchTerm && (
+            <div className="text-gray-500">
+              (difilter dari {data.length} total)
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="overflow-x-auto">
         {loading ? (
-          <div className="flex justify-center items-center py-12">
-            <div className="animate-pulse flex space-x-4">
-              <div className="rounded-full bg-gray-300 h-6 w-6"></div>
-              <div className="flex-1 space-y-2 py-1">
-                <div className="h-4 bg-gray-300 rounded w-3/4"></div>
-                <div className="h-4 bg-gray-300 rounded w-1/2"></div>
-              </div>
+          <div className="flex flex-col justify-center items-center py-16">
+            <div className="relative w-16 h-16">
+              <div className="absolute inset-0 border-4 border-blue-200 rounded-full"></div>
+              <div className="absolute inset-0 border-4 border-blue-600 rounded-full border-t-transparent animate-spin"></div>
             </div>
+            <p className="mt-4 text-gray-600 font-medium">Memuat data...</p>
           </div>
         ) : error ? (
-          <div className="flex flex-col justify-center items-center py-12">
-            <div className="text-red-500 mb-2">⚠️ Error loading data</div>
-            <div className="text-gray-600 text-sm">{error}</div>
+          <div className="flex flex-col justify-center items-center py-16">
+            <div className="bg-red-50 rounded-full p-4 mb-4">
+              <AlertCircle className="w-12 h-12 text-red-500" />
+            </div>
+            <div className="text-red-600 font-semibold mb-2">Error loading data</div>
+            <div className="text-gray-600 text-sm mb-4">{error}</div>
             <button 
               onClick={() => window.location.reload()} 
-              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all font-medium shadow-lg hover:shadow-xl"
             >
+              <RefreshCw className="w-4 h-4" />
               Refresh
             </button>
           </div>
         ) : (
-          <table className="w-full table-auto text-sm text-left">
-          <thead className="bg-gray-50">
-            <tr>
-              {columnOrder.map((col, idx) => (
-                <th key={idx} className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
-                  {col.replace(/_/g, ' ')}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="text-gray-600 font-sans divide-y divide-gray-200">
-            {paginatedData.length > 0 ? (
-              paginatedData.map((item, idx) => (
-                <tr key={idx} className="hover:bg-gray-50">
-                  {columnOrder.map((col, i) => {
-                    const value = item[col];
-
-                    // Atur warna background untuk polarity
-                    let cellClass = "px-6 py-4";
-                    let cellContent = value;
-                    
-                    if (col === "polarity") {
-                      const polarityClass =
-                        value === "positive"
-                          ? "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800"
-                          : value === "negative"
-                          ? "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"
-                          : "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800";
-                      
-                      cellContent = (
-                        <span className={polarityClass}>
-                          {value}
-                        </span>
-                      );
-                    } else if (col === "text_clean" && value?.length > 100) {
-                      cellContent = `${value.slice(0, 100)}...`;
-                    } else if (col === "full_text" && value?.length > 150) {
-                      cellContent = `${value.slice(0, 150)}...`;
-                    }
-
-                    return (
-                      <td key={i} className={cellClass}>
-                        {cellContent}
-                      </td>
-                    );
-                  })}
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={columnOrder.length} className="px-6 py-8 text-center text-gray-500">
-                  {searchTerm ? "Tidak ada data yang sesuai dengan pencarian" : "Tidak ada data"}
-                </td>
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-gradient-to-r from-gray-50 to-gray-100 border-b-2 border-gray-200">
+                {columnOrder.map((col, idx) => (
+                  <th key={idx} className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                    {col.replace(/_/g, ' ')}
+                  </th>
+                ))}
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {paginatedData.length > 0 ? (
+                paginatedData.map((item, idx) => (
+                  <tr key={idx} className="hover:bg-blue-50/50 transition-colors">
+                    {columnOrder.map((col, i) => {
+                      const value = item[col];
+                      let cellContent = value;
+                      
+                      if (col === "polarity") {
+                        const polarityConfig = {
+                          positive: {
+                            bg: "bg-green-100",
+                            text: "text-green-800",
+                            dot: "bg-green-500",
+                            label: "Positif"
+                          },
+                          negative: {
+                            bg: "bg-red-100",
+                            text: "text-red-800",
+                            dot: "bg-red-500",
+                            label: "Negatif"
+                          }
+                        };
+                        
+                        const config = polarityConfig[value] || {
+                          bg: "bg-gray-100",
+                          text: "text-gray-800",
+                          dot: "bg-gray-500",
+                          label: value
+                        };
+                        
+                        cellContent = (
+                          <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold ${config.bg} ${config.text}`}>
+                            <span className={`w-2 h-2 rounded-full ${config.dot}`}></span>
+                            {config.label}
+                          </span>
+                        );
+                      } else if ((col === "text_clean" && value?.length > 100) || (col === "full_text" && value?.length > 150)) {
+                        const maxLength = col === "text_clean" ? 100 : 150;
+                        cellContent = (
+                          <div className="max-w-2xl">
+                            <p className="text-gray-700 leading-relaxed">
+                              {value.slice(0, maxLength)}
+                              {value.length > maxLength && (
+                                <span className="text-gray-400">...</span>
+                              )}
+                            </p>
+                          </div>
+                        );
+                      }
+
+                      return (
+                        <td key={i} className="px-6 py-4 text-gray-600">
+                          {cellContent}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={columnOrder.length} className="px-6 py-12 text-center">
+                    <div className="flex flex-col items-center gap-3">
+                      <div className="bg-gray-100 rounded-full p-4">
+                        <Search className="w-8 h-8 text-gray-400" />
+                      </div>
+                      <p className="text-gray-500 font-medium">
+                        {searchTerm ? "Tidak ada data yang sesuai dengan pencarian" : "Tidak ada data tersedia"}
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         )}
       </div>
 
       {/* Pagination */}
-      <div className="px-4 py-3 bg-gray-50 border-t flex flex-col sm:flex-row justify-between items-center gap-4">
-        <p className="text-sm text-gray-600">
-          Halaman {totalPages > 0 ? page + 1 : 0} dari {totalPages}
-        </p>
-        <div className="flex items-center space-x-2">
-          <button
-            onClick={() => setPage(0)}
-            disabled={page === 0}
-            className="px-3 py-2 text-sm bg-gray-200 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300"
-          >
-            Pertama
-          </button>
-          <button
-            onClick={() => setPage((p) => Math.max(p - 1, 0))}
-            disabled={page === 0}
-            className="px-3 py-2 text-sm bg-gray-200 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300"
-          >
-            Sebelumnya
-          </button>
-          
-          {/* Page numbers */}
-          {totalPages > 1 && (
-            <div className="flex space-x-1">
-              {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                let pageNum;
-                if (totalPages <= 5) {
-                  pageNum = i;
-                } else if (page < 3) {
-                  pageNum = i;
-                } else if (page > totalPages - 4) {
-                  pageNum = totalPages - 5 + i;
-                } else {
-                  pageNum = page - 2 + i;
-                }
-                
-                return (
-                  <button
-                    key={pageNum}
-                    onClick={() => setPage(pageNum)}
-                    className={`px-3 py-2 text-sm rounded-lg ${
-                      page === pageNum
-                        ? "bg-blue-600 text-white"
-                        : "bg-gray-200 hover:bg-gray-300"
-                    }`}
-                  >
-                    {pageNum + 1}
-                  </button>
-                );
-              })}
-            </div>
-          )}
-          
-          <button
-            onClick={() => setPage((p) => Math.min(p + 1, totalPages - 1))}
-            disabled={page >= totalPages - 1}
-            className="px-3 py-2 text-sm bg-gray-200 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300"
-          >
-            Selanjutnya
-          </button>
-          <button
-            onClick={() => setPage(totalPages - 1)}
-            disabled={page >= totalPages - 1}
-            className="px-3 py-2 text-sm bg-gray-200 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300"
-          >
-            Terakhir
-          </button>
+      <div className="px-6 py-4 bg-gradient-to-b from-white to-gray-50 border-t border-gray-200">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-sm font-medium text-gray-600">
+            Halaman <span className="text-blue-600 font-bold">{totalPages > 0 ? page + 1 : 0}</span> dari <span className="font-bold">{totalPages}</span>
+          </p>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setPage(0)}
+              disabled={page === 0}
+              className="px-4 py-2 text-sm font-medium bg-white border-2 border-gray-200 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 hover:border-blue-300 transition-all"
+            >
+              Pertama
+            </button>
+            <button
+              onClick={() => setPage((p) => Math.max(p - 1, 0))}
+              disabled={page === 0}
+              className="px-4 py-2 text-sm font-medium bg-white border-2 border-gray-200 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 hover:border-blue-300 transition-all"
+            >
+              ‹
+            </button>
+            
+            {totalPages > 1 && (
+              <div className="flex gap-1">
+                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                  let pageNum;
+                  if (totalPages <= 5) {
+                    pageNum = i;
+                  } else if (page < 3) {
+                    pageNum = i;
+                  } else if (page > totalPages - 4) {
+                    pageNum = totalPages - 5 + i;
+                  } else {
+                    pageNum = page - 2 + i;
+                  }
+                  
+                  return (
+                    <button
+                      key={pageNum}
+                      onClick={() => setPage(pageNum)}
+                      className={`px-4 py-2 text-sm font-semibold rounded-lg transition-all ${
+                        page === pageNum
+                          ? "bg-blue-600 text-white shadow-lg shadow-blue-200"
+                          : "bg-white border-2 border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-blue-300"
+                      }`}
+                    >
+                      {pageNum + 1}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+            
+            <button
+              onClick={() => setPage((p) => Math.min(p + 1, totalPages - 1))}
+              disabled={page >= totalPages - 1}
+              className="px-4 py-2 text-sm font-medium bg-white border-2 border-gray-200 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 hover:border-blue-300 transition-all"
+            >
+              ›
+            </button>
+            <button
+              onClick={() => setPage(totalPages - 1)}
+              disabled={page >= totalPages - 1}
+              className="px-4 py-2 text-sm font-medium bg-white border-2 border-gray-200 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 hover:border-blue-300 transition-all"
+            >
+              Terakhir
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -275,21 +320,22 @@ const TableComponent = ({ title, description, endpoint, columnOrder }) => {
 
 const CsvTable = () => {
   return (
-    <div className="max-w-screen-xl mx-auto px-2 py-3 min-h-screen">
-      
+    <section className="relative overflow-hidden pt-28 pb-20 px-4 bg-white md:px-8">
+    <div className="max-w-screen-xl mx-auto px-4 py-8 min-h-screen">
       <TableComponent
-        title="Dataset Sebelum"
-        description="Dataset hasil crawling menggunakan tweet harvest"
+        title="Dataset Sebelum Preprocessing"
+        description="Dataset hasil crawling menggunakan Tweet Harvest"
         endpoint="dataset/before"
         columnOrder={["full_text"]}
       />
       <TableComponent
-        title="Dataset hasil preprocessing"
-        description="Dataset sesudah dipreprocesing menggunakan cleansing > normalisasi > tokenisasi > stopword removal > stemming > labelling"
+        title="Dataset Hasil Preprocessing"
+        description="Dataset sesudah preprocessing: cleansing → normalisasi → tokenisasi → stopword removal → stemming → labelling"
         endpoint="dataset/after"
         columnOrder={["text_clean", "polarity"]}
       />
     </div>
+  </section>
   );
 };
 

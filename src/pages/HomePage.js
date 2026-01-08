@@ -1,9 +1,10 @@
 import BarChartSentimen from "../components/BarChartSentimen";
 import ScoreCard from "../components/ScoreCard";
+import RotatingText from "../components/RotatingText";
 
 const HomePage = () => {
   return (
-    <section className="relative overflow-hidden py-28 px-4 bg-white md:px-8">
+    <section className="relative overflow-hidden py-28 px-4 bg-white md:px-8 pt-28 pb-20">
       <div className="max-w-screen-xl mx-auto md:px-8">
         <div className="items-center gap-x-12 sm:px-4 md:px-0 lg:flex">
           <div className="flex-1 sm:hidden lg:block">
@@ -14,9 +15,14 @@ const HomePage = () => {
             />
           </div>
           <div className="max-w-xl px-4 space-y-3 mt-6 sm:px-0 md:mt-0 lg:max-w-2xl">
-            <p className="text-gray-800 text-3xl font-semibold sm:text-4xl">
-              Analisis Sentimen Terhadap Facebook Marketplace
-            </p>
+            <h1 className="text-gray-800 text-3xl font-bold sm:text-4xl flex flex-wrap items-center gap-2">
+              <span>Analisis Sentimen Terhadap</span>
+              <RotatingText
+                texts={['Facebook Marketplace', 'Pengguna Media Sosial', 'Platform E-Commerce']}
+                interval={2500}
+                className="px-3 bg-blue-600 text-white py-1 rounded-lg inline-block"
+              />
+            </h1>
             <p className="mt-3 text-gray-600">
               Website ini merupakan hasil dari Tugas Akhir berjudul "Analisis Sentimen Facebook Marketplace Menggunakan Metode Support Vector Machine dan Seleksi Fitur Chi Square". Penelitian ini bertujuan untuk mengklasifikasikan opini pengguna terhadap Facebook Marketplace ke dalam sentimen positif dan negatif. Dengan menggunakan algoritma Support Vector Machine (SVM) sebagai metode klasifikasi dan Chi Square sebagai teknik seleksi fitur, sistem ini dikembangkan untuk menyajikan analisis sentimen secara efektif dan informatif berdasarkan data dari media sosial X.
             </p>
@@ -43,29 +49,15 @@ const HomePage = () => {
       </div>
       <div className="flex flex-col lg:flex-row items-start justify-center w-full gap-12 mt-20">
         {/* Card 1 - Bar Chart */}
-        <div className="bg-white hover:shadow-xl rounded-xl border p-3 w-full max-w-[550px] animate-in fade-in-10 slide-in-from-top-10 duration-700 delay-400">
+        <div className="w-full max-w-[550px]">
           <BarChartSentimen />
-          <h2 className="text-xl font-semibold mb-3 text-left">Distribusi Sentimen</h2>
-          <p class="mt-1 text-gray-500 dark:text-neutral-400">
-      Visualisasi ini menampilkan sebaran data positif dan negatif yang digunakan dalam proses pelatihan (training) dan pengujian (testing) model.
-        </p>
+        </div>
+        <div className="w-full max-w-[550px]">
+          <ScoreCard />
         </div>
 
         {/* Card 2 - Wordcloud Image */}
-        <div className="bg-white hover:shadow-xl rounded-xl border p-3 w-full max-w-[550px] animate-in fade-in-10 slide-in-from-top-10 duration-700 delay-400 ">
-          <img
-            className="w-full h-[300px] object-contain rounded-xl"
-            src="/images/wordcloud.png"
-            alt="Wordcloud"
-          />
-          <h2 className="text-xl font-semibold mb-3 text-left">Word Cloud</h2>
-          <p class="mt-1 text-gray-500 dark:text-neutral-400">
-      Wordcloud menyoroti kata-kata paling sering muncul pada masing-masing kategori sentimen serta ukuran kata mencerminkan tingkat kemunculannya.
-        </p>
-        </div>
-      </div>
-      <div className="max-w-screen-xl mx-auto md:px-8 p-4">
-        <ScoreCard />
+        
       </div>
       <div className="flex flex-row items-start justify-center w-full mt-10">
       </div>

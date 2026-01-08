@@ -1,8 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [state, setState] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Detect scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navigation = [
     { title: "Home", path: "/" },
@@ -11,7 +22,13 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white z-10 w-full md:static relative">
+    <nav 
+      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
+        scrolled 
+          ? 'bg-white/80 backdrop-blur-md shadow-md' 
+          : 'bg-white/60 backdrop-blur-sm'
+      }`}
+    >
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
         <div className="flex items-center justify-between py-3 md:py-5 md:block">
           <Link to="/">
@@ -29,8 +46,7 @@ const Navbar = () => {
             >
               {state ? (
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.
-                  293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               ) : (
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -43,19 +59,18 @@ const Navbar = () => {
         <div className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${state ? 'block' : 'hidden'}`}>
           <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0">
             {navigation.map((item, idx) => (
-              <li key={idx} className="text-black hover:text-indigo-400">
+              <li key={idx} className="text-gray-800 font-medium hover:text-indigo-600 transition-colors">
                 <Link to={item.path}>{item.title}</Link>
               </li>
             ))}
           </ul>
         </div>
         <div className="hidden md:inline-block">
-          <Link to="/predict" className="py-3 px-4 text-white bg-[#3D90D7] hover:bg-indigo-700 rounded-md shadow">
+          <Link to="/predict" className="py-3 px-4 text-white bg-blue-600 hover:bg-indigo-700 rounded-md shadow transition-all">
             Get Started
           </Link>
         </div>
       </div>
-      
     </nav>
   );
 };

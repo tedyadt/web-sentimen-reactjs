@@ -1,38 +1,61 @@
-const Semicircleprogress = ({ title, percentage }) => {
-  const radius = 60;
-  const circumference = Math.PI * radius;
+const CircularProgressCard = ({ title, percentage }) => {
+  const radius = 70;
+  const circumference = 2 * Math.PI * radius;
   const offset = circumference - (percentage / 100) * circumference;
 
   return (
-    <div className="bg-white shadow-md rounded-2xl p-4 flex flex-row items-center gap-2 w-full">
-      <h2 className="text-base sm:text-lg font-semibold text-gray-800">{title}</h2>
-      <div className="w-full max-w-[180px] aspect-[14/10] relative">
-        <svg viewBox="0 0 140 100" className="w-full h-full">
-          {/* Background */}
-          <path
-            d="M 10 90 A 60 60 0 0 1 130 90"
+    <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 w-full max-w-xs border border-gray-100">
+      <h2 className="text-lg font-semibold text-gray-800 text-center mb-6">{title}</h2>
+      
+      <div className="relative w-40 h-40 mx-auto">
+        <svg className="w-full h-full -rotate-90 transform">
+          {/* Background circle */}
+          <circle
+            cx="80"
+            cy="80"
+            r={radius}
+            stroke="#e2e8f0"
+            strokeWidth="16"
             fill="none"
-            stroke="#e5e7eb"
-            strokeWidth="15"
           />
-          {/* Foreground */}
-          <path
-            d="M 10 90 A 60 60 0 0 1 130 90"
+          
+          {/* Progress circle with gradient & animation */}
+          <circle
+            cx="80"
+            cy="80"
+            r={radius}
+            stroke="url(#gradient)"
+            strokeWidth="16"
             fill="none"
-            stroke="#3D90D7"
-            strokeWidth="15"
             strokeDasharray={circumference}
-            strokeDashoffset={offset}
+            strokeDashoffset={circumference}
             strokeLinecap="round"
+            className="transition-all duration-2000 ease-out"
+            style={{ strokeDashoffset: offset }}
           />
+          
+          {/* Gradient */}
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#60a5fa" />
+              <stop offset="50%" stopColor="#3b82f6" />
+              <stop offset="100%" stopColor="#2563eb" />
+            </linearGradient>
+          </defs>
         </svg>
-        <div className="absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg font-bold text-gray-900 mt-6">
-          {percentage}%
+        
+        {/* Percentage text */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center">
+            <div className="text-4xl font-bold text-gray-900">
+              {percentage}%
+            </div>
+            <div className="text-sm text-gray-500 mt-1">Complete</div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-
-export default Semicircleprogress;
+export default CircularProgressCard;

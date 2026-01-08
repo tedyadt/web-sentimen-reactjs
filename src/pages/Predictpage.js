@@ -4,9 +4,10 @@ import { TrendingUp } from 'lucide-react';
 
 const PredictPage = () => {
   return (
+    <section className="relative overflow-hidden pt-28 pb-20 px-4 bg-white md:px-8">
     <div className="min-h-screen">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-white">
           <div className="text-center">
         <div className="max-w-4xl mx-auto px-4 py-6">
             <div className="flex justify-center items-center gap-3 mb-2">
@@ -22,9 +23,11 @@ const PredictPage = () => {
         </div>
       </div>
 
+
       {/* Main Content */}
       <SentimentPredictor />
     </div>
+  </section>
   );
 };
 
